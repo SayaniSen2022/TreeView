@@ -1,0 +1,37 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.tree {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.tree-item {
+  margin: 5px 0;
+  cursor: pointer;
+  padding: 2px 0;
+  /* display: flex;
+  align-items: start; */
+}
+
+.tree-item .icon {
+  margin-right: 5px;
+}
+
+.tree-item .label {
+  user-select: none;
+}
+
+.tree ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.search-bar input {
+  text-align: left;
+  margin-left: 20px;
+}

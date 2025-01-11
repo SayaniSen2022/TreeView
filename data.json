@@ -1,0 +1,326 @@
+{
+  "root": {
+    "type": "directory",
+    "name": "e-commerce-platform",
+    "children": [
+      {
+        "type": "directory",
+        "name": "src",
+        "children": [
+          {
+            "type": "directory",
+            "name": "components",
+            "children": [
+              {
+                "type": "directory",
+                "name": "layout",
+                "children": [
+                  {
+                    "type": "file",
+                    "name": "Navbar.tsx",
+                    "size": "4.2KB",
+                    "lastModified": "2025-01-07T14:30:00Z"
+                  },
+                  {
+                    "type": "file",
+                    "name": "Footer.tsx",
+                    "size": "3.8KB",
+                    "lastModified": "2025-01-07T14:35:00Z"
+                  },
+                  {
+                    "type": "file",
+                    "name": "Sidebar.tsx",
+                    "size": "2.9KB",
+                    "lastModified": "2025-01-07T15:20:00Z"
+                  }
+                ]
+              },
+              {
+                "type": "directory",
+                "name": "product",
+                "children": [
+                  {
+                    "type": "file",
+                    "name": "ProductCard.tsx",
+                    "size": "2.8KB",
+                    "lastModified": "2025-01-08T09:15:00Z"
+                  },
+                  {
+                    "type": "file",
+                    "name": "ProductGrid.tsx",
+                    "size": "3.1KB",
+                    "lastModified": "2025-01-08T09:20:00Z"
+                  },
+                  {
+                    "type": "file",
+                    "name": "ProductDetails.tsx",
+                    "size": "5.6KB",
+                    "lastModified": "2025-01-08T10:45:00Z"
+                  },
+                  {
+                    "type": "file",
+                    "name": "ProductReviews.tsx",
+                    "size": "4.2KB",
+                    "lastModified": "2025-01-08T11:30:00Z"
+                  }
+                ]
+              },
+              {
+                "type": "directory",
+                "name": "cart",
+                "children": [
+                  {
+                    "type": "file",
+                    "name": "CartItem.tsx",
+                    "size": "2.1KB",
+                    "lastModified": "2025-01-08T13:20:00Z"
+                  },
+                  {
+                    "type": "file",
+                    "name": "CartSummary.tsx",
+                    "size": "3.4KB",
+                    "lastModified": "2025-01-08T13:25:00Z"
+                  },
+                  {
+                    "type": "file",
+                    "name": "CheckoutForm.tsx",
+                    "size": "6.8KB",
+                    "lastModified": "2025-01-08T14:15:00Z"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "directory",
+            "name": "hooks",
+            "children": [
+              {
+                "type": "file",
+                "name": "useCart.ts",
+                "size": "2.4KB",
+                "lastModified": "2025-01-07T16:40:00Z"
+              },
+              {
+                "type": "file",
+                "name": "useAuth.ts",
+                "size": "3.1KB",
+                "lastModified": "2025-01-07T16:45:00Z"
+              },
+              {
+                "type": "file",
+                "name": "useProducts.ts",
+                "size": "2.8KB",
+                "lastModified": "2025-01-07T16:50:00Z"
+              }
+            ]
+          },
+          {
+            "type": "directory",
+            "name": "services",
+            "children": [
+              {
+                "type": "file",
+                "name": "api.ts",
+                "size": "4.5KB",
+                "lastModified": "2025-01-06T11:20:00Z"
+              },
+              {
+                "type": "file",
+                "name": "auth.service.ts",
+                "size": "3.2KB",
+                "lastModified": "2025-01-06T11:25:00Z"
+              },
+              {
+                "type": "file",
+                "name": "products.service.ts",
+                "size": "5.1KB",
+                "lastModified": "2025-01-06T11:30:00Z"
+              }
+            ]
+          },
+          {
+            "type": "directory",
+            "name": "styles",
+            "children": [
+              {
+                "type": "file",
+                "name": "global.scss",
+                "size": "8.4KB",
+                "lastModified": "2025-01-05T10:15:00Z"
+              },
+              {
+                "type": "file",
+                "name": "_variables.scss",
+                "size": "1.2KB",
+                "lastModified": "2025-01-05T10:20:00Z"
+              },
+              {
+                "type": "file",
+                "name": "_mixins.scss",
+                "size": "2.1KB",
+                "lastModified": "2025-01-05T10:25:00Z"
+              },
+              {
+                "type": "file",
+                "name": "components.scss",
+                "size": "12.6KB",
+                "lastModified": "2025-01-05T10:30:00Z"
+              }
+            ]
+          },
+          {
+            "type": "file",
+            "name": "App.tsx",
+            "size": "4.2KB",
+            "lastModified": "2025-01-08T16:20:00Z"
+          },
+          {
+            "type": "file",
+            "name": "main.tsx",
+            "size": "1.8KB",
+            "lastModified": "2025-01-08T16:25:00Z"
+          }
+        ]
+      },
+      {
+        "type": "directory",
+        "name": "public",
+        "children": [
+          {
+            "type": "directory",
+            "name": "images",
+            "children": [
+              {
+                "type": "file",
+                "name": "logo-dark.svg",
+                "size": "15KB",
+                "lastModified": "2025-01-01T15:00:00Z"
+              },
+              {
+                "type": "file",
+                "name": "logo-light.svg",
+                "size": "15KB",
+                "lastModified": "2025-01-01T15:05:00Z"
+              },
+              {
+                "type": "file",
+                "name": "hero-banner.webp",
+                "size": "420KB",
+                "lastModified": "2025-01-01T15:10:00Z"
+              },
+              {
+                "type": "file",
+                "name": "placeholder-product.webp",
+                "size": "25KB",
+                "lastModified": "2025-01-01T15:15:00Z"
+              }
+            ]
+          },
+          {
+            "type": "directory",
+            "name": "fonts",
+            "children": [
+              {
+                "type": "file",
+                "name": "Inter-Regular.woff2",
+                "size": "89KB",
+                "lastModified": "2025-01-01T14:30:00Z"
+              },
+              {
+                "type": "file",
+                "name": "Inter-Medium.woff2",
+                "size": "92KB",
+                "lastModified": "2025-01-01T14:35:00Z"
+              },
+              {
+                "type": "file",
+                "name": "Inter-Bold.woff2",
+                "size": "95KB",
+                "lastModified": "2025-01-01T14:40:00Z"
+              }
+            ]
+          },
+          {
+            "type": "file",
+            "name": "index.html",
+            "size": "1.8KB",
+            "lastModified": "2025-01-08T16:30:00Z"
+          },
+          {
+            "type": "file",
+            "name": "favicon.ico",
+            "size": "4.8KB",
+            "lastModified": "2025-01-01T14:00:00Z"
+          },
+          {
+            "type": "file",
+            "name": "robots.txt",
+            "size": "0.2KB",
+            "lastModified": "2025-01-01T14:05:00Z"
+          }
+        ]
+      },
+      {
+        "type": "directory",
+        "name": "tests",
+        "children": [
+          {
+            "type": "file",
+            "name": "ProductCard.test.tsx",
+            "size": "3.2KB",
+            "lastModified": "2025-01-08T15:20:00Z"
+          },
+          {
+            "type": "file",
+            "name": "CartItem.test.tsx",
+            "size": "2.8KB",
+            "lastModified": "2025-01-08T15:25:00Z"
+          },
+          {
+            "type": "file",
+            "name": "useCart.test.ts",
+            "size": "2.4KB",
+            "lastModified": "2025-01-08T15:30:00Z"
+          }
+        ]
+      },
+      {
+        "type": "file",
+        "name": "package.json",
+        "size": "2.1KB",
+        "lastModified": "2025-01-08T16:40:00Z"
+      },
+      {
+        "type": "file",
+        "name": "tsconfig.json",
+        "size": "0.8KB",
+        "lastModified": "2025-01-01T13:50:00Z"
+      },
+      {
+        "type": "file",
+        "name": "vite.config.ts",
+        "size": "1.2KB",
+        "lastModified": "2025-01-01T13:55:00Z"
+      },
+      {
+        "type": "file",
+        "name": ".eslintrc.json",
+        "size": "0.9KB",
+        "lastModified": "2025-01-01T14:00:00Z"
+      },
+      {
+        "type": "file",
+        "name": ".prettierrc",
+        "size": "0.3KB",
+        "lastModified": "2025-01-01T14:05:00Z"
+      },
+      {
+        "type": "file",
+        "name": "README.md",
+        "size": "5.8KB",
+        "lastModified": "2025-01-08T16:45:00Z"
+      }
+    ]
+  }
+}
