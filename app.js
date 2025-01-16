@@ -1,3 +1,14 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,6 +45,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+// Function to toggle node visibility
+function toggleNode(nodeElement) {
+    var ul = nodeElement.querySelector("ul");
+    if (ul) {
+        ul.style.display = ul.style.display === "none" ? "block" : "none";
+    }
+}
+// Function to recursively make all parent nodes visible
+function makeParentsVisible(nodeElement) {
+    if ((nodeElement === null || nodeElement === void 0 ? void 0 : nodeElement.tagName) === "LI") {
+        var parentUl = nodeElement.parentElement; // Parent UL
+        var parentLi = parentUl === null || parentUl === void 0 ? void 0 : parentUl.parentElement; // Parent LI
+        if (parentUl && parentUl.tagName === "UL") {
+            parentUl.style.display = "block"; // Make the parent UL visible
+        }
+        if (parentLi && parentLi.tagName === "LI") {
+            makeParentsVisible(parentLi); // Recursively make parent LI visible
+        }
+    }
+}
+// Function to render the main Tree
 function renderTree(container, data) {
     return __awaiter(this, void 0, void 0, function () {
         function createTreeNode(node) {
@@ -49,6 +81,8 @@ function renderTree(container, data) {
             label.textContent = node.name;
             li.appendChild(icon);
             li.appendChild(label);
+            // Attach data to the element for reference
+            li.dataset.nodeInfo = JSON.stringify(node);
             if (node.type === "directory" && node.children) {
                 var ul_1 = document.createElement("ul");
                 ul_1.style.display = "none"; // Hidden by default
@@ -56,10 +90,18 @@ function renderTree(container, data) {
                     ul_1.appendChild(createTreeNode(child));
                 });
                 li.appendChild(ul_1);
-                // Expand/collapse functionality
+                // Attach the toggle functionality
                 li.addEventListener("click", function (event) {
                     event.stopPropagation();
-                    ul_1.style.display = ul_1.style.display === "none" ? "block" : "none";
+                    toggleNode(li);
+                    console.log("Clicked Node:", JSON.parse(li.dataset.nodeInfo || "{}"));
+                });
+            }
+            else {
+                // Add click listener for file nodes
+                li.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                    console.log("Clicked Node:", JSON.parse(li.dataset.nodeInfo || "{}"));
                 });
             }
             return li;
@@ -69,33 +111,74 @@ function renderTree(container, data) {
             ul = document.createElement("ul");
             ul.classList.add("tree");
             ul.appendChild(createTreeNode(data));
+            container.innerHTML = ""; // Clear existing content
             container.appendChild(ul);
             return [2 /*return*/];
         });
     });
 }
+// Function to search the tree for matching nodes
+function searchTree(node, searchTerm) {
+    if (node.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+        return node;
+    }
+    if (node.children) {
+        var filteredChildren = node.children
+            .map(function (child) { return searchTree(child, searchTerm); })
+            .filter(function (child) { return child !== null; });
+        if (filteredChildren.length > 0) {
+            return __assign(__assign({}, node), { children: filteredChildren });
+        }
+    }
+    return null;
+}
 // Fetch JSON data
-function init() {
+function fetchData() {
     return __awaiter(this, void 0, void 0, function () {
-        var container, response, jsonData;
+        var container, searchBar, searchButton, response, jsonData_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     container = document.getElementById("tree-container");
-                    if (!container) return [3 /*break*/, 4];
+                    searchBar = document.getElementById("search-text");
+                    searchButton = document.getElementById("search-btn");
+                    if (!container) return [3 /*break*/, 3];
                     return [4 /*yield*/, fetch("data.json")];
                 case 1:
                     response = _a.sent();
                     return [4 /*yield*/, response.json()];
                 case 2:
-                    jsonData = _a.sent();
-                    return [4 /*yield*/, renderTree(container, jsonData.root)];
-                case 3:
-                    _a.sent();
-                    _a.label = 4;
-                case 4: return [2 /*return*/];
+                    jsonData_1 = _a.sent();
+                    // Render the initial tree
+                    renderTree(container, jsonData_1.root);
+                    // Add search functionality
+                    searchButton === null || searchButton === void 0 ? void 0 : searchButton.addEventListener("click", function () {
+                        var _a;
+                        var searchTerm = (_a = searchBar === null || searchBar === void 0 ? void 0 : searchBar.value) === null || _a === void 0 ? void 0 : _a.trim();
+                        // console.log(searchTerm);
+                        // Perform the search
+                        var filteredTree = searchTree(jsonData_1.root, searchTerm);
+                        if (filteredTree) {
+                            console.log(filteredTree.children);
+                            renderTree(container, filteredTree); // Render the filtered tree
+                            // Highlight and expand the matching nodes
+                            var allNodes = container.querySelectorAll("li.tree-item");
+                            allNodes.forEach(function (node) {
+                                var nodeData = JSON.parse(node.dataset.nodeInfo || "{}");
+                                if (nodeData.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                                    node.scrollIntoView({ behavior: "smooth", block: "center" });
+                                    makeParentsVisible(node); // Ensure all parents are visible
+                                }
+                            });
+                        }
+                        else {
+                            container.innerHTML = "<p>No matches found</p>"; // Show no results message
+                        }
+                    });
+                    _a.label = 3;
+                case 3: return [2 /*return*/];
             }
         });
     });
 }
-init();
+fetchData();
