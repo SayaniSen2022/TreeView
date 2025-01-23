@@ -86,14 +86,91 @@ async function renderTree(container: HTMLElement, data: TreeNode) {
 }
 
 // Function to search the tree for matching nodes
-function searchTree(node: TreeNode, searchTerm: string | undefined) {
-  if (node.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+// function searchTree(node: TreeNode, searchTerm: string | undefined) {
+//   if (node.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+//     return node;
+//   }
+
+//   if (node.children) {
+//     const filteredChildren = node.children
+//       .map((child) => searchTree(child, searchTerm))
+//       .filter((child) => child !== null);
+
+//     if (filteredChildren.length > 0) {
+//       return { ...node, children: filteredChildren };
+//     }
+//   }
+
+//   return null;
+// }
+
+// Fetch JSON data
+// async function fetchData() {
+//   const container = document.getElementById("tree-container");
+//   const searchBar = document.getElementById("search-text");
+//   const searchButton = document.getElementById("search-btn");
+
+//   if (container) {
+//     const response = await fetch("data.json");
+//     const jsonData = await response.json();
+
+//     // Render the initial tree
+//     renderTree(container, jsonData.root);
+
+//     // Add search functionality
+//     searchButton?.addEventListener("click", () => {
+//       const searchTerm = searchBar?.value?.trim();
+//       // console.log(searchTerm);
+
+//       // Perform the search
+//       const filteredTree = searchTree(jsonData.root, searchTerm);
+
+//       if (filteredTree) {
+//         console.log(filteredTree.children);
+//         renderTree(container, filteredTree); // Render the filtered tree
+
+//         // Highlight and expand the matching nodes
+//         const allNodes = container.querySelectorAll("li.tree-item");
+//         allNodes.forEach((node) => {
+//           const nodeData = JSON.parse(node.dataset.nodeInfo || "{}");
+//           if (nodeData.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+//             node.scrollIntoView({ behavior: "smooth", block: "center" });
+//             makeParentsVisible(node as HTMLElement); // Ensure all parents are visible
+//           }
+//         });
+//       } else {
+//         container.innerHTML = "<p>No matches found</p>"; // Show no results message
+//       }
+//     });
+//   }
+// }
+
+// Fuzzy search function
+function fuzzyMatch(input, target) {
+  input = input.toLowerCase();
+  target = target.toLowerCase();
+
+  let i = 0,
+    j = 0;
+  while (i < input.length && j < target.length) {
+    if (input[i] === target[j]) {
+      i++;
+    }
+    j++;
+  }
+
+  return i === input.length; // True if all characters in input match in order
+}
+
+// Function to search the tree with fuzzy matching
+function searchTreeFuzzy(node, searchTerm) {
+  if (fuzzyMatch(searchTerm, node.name)) {
     return node;
   }
 
   if (node.children) {
     const filteredChildren = node.children
-      .map((child) => searchTree(child, searchTerm))
+      .map((child) => searchTreeFuzzy(child, searchTerm))
       .filter((child) => child !== null);
 
     if (filteredChildren.length > 0) {
@@ -122,8 +199,8 @@ async function fetchData() {
       const searchTerm = searchBar?.value?.trim();
       // console.log(searchTerm);
 
-      // Perform the search
-      const filteredTree = searchTree(jsonData.root, searchTerm);
+      // Perform the fuzzy search
+      const filteredTree = searchTreeFuzzy(jsonData.root, searchTerm);
 
       if (filteredTree) {
         console.log(filteredTree.children);
@@ -133,7 +210,7 @@ async function fetchData() {
         const allNodes = container.querySelectorAll("li.tree-item");
         allNodes.forEach((node) => {
           const nodeData = JSON.parse(node.dataset.nodeInfo || "{}");
-          if (nodeData.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+          if (fuzzyMatch(searchTerm, nodeData.name)) {
             node.scrollIntoView({ behavior: "smooth", block: "center" });
             makeParentsVisible(node as HTMLElement); // Ensure all parents are visible
           }
